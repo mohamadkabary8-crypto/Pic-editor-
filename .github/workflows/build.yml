@@ -1,4 +1,4 @@
-name: Build Android APK
+name: name: Build Android APK
 
 on:
   push:
@@ -8,22 +8,21 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
-      - name: دریافت فایل‌های مخزن
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: ساخت APK با Buildozer
+      - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
         with:
           command: buildozer android debug
 
-      - name: ذخیره APK برای دانلود
-        if: success()
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Photo-Master-Pro-APK
+          name: package
           path: bin/*.apk
-          if-no-files-found: error
-          
+ Android APK
